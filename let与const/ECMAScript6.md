@@ -50,7 +50,6 @@ console.log(i);		//	ReferenceError: i is not defined
 
 - 效果对比参见    let与var变量提升对比.js
 
-
 ***
 
 #### 暂时性死区
@@ -85,5 +84,52 @@ console.log(i);		//	ReferenceError: i is not defined
 
 ***
 
+### 块级作用域
 
+### ES5的问题
+
+> <u>ES5只有全局作用域和函数作用域</u>
+
+- 内层变量可能覆盖外层变量
+
+  ```javascript
+  var temp = new Date();
+  
+  function fun () {
+      console.log(temp);
+      if(false) {
+          var temp = "123";
+      }
+  }
+  
+  fun()   // undefined
+  //	输出结果 undefined，声明语句变量提升导致内层temp覆盖了外层的temp
+  ```
+
+- 计数循环循环变量泄露
+
+  ```javascript
+  var str = "hello";
+  for(var i = 0; i < ate.length; i++) {
+      console.log(s[i]);
+  }
+  
+  console.log(i)     //	5
+  //	循环虽然已经结束了，但是变量并没有消失，而是泄露成了全局变量
+  ```
+
+### ES6块级作用域
+
+> `let`为JavaScript增加了<b>块级作用域</b>
+
+```javascript
+function fun() {
+    let n = 5;
+    if(true) {
+        let n = 10;
+    }
+    console.log(n)	//5
+}
+// 外层代码不受内层代码块的影响 
+```
 
